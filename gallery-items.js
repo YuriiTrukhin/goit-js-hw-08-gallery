@@ -64,8 +64,7 @@ const array = [
   },
 ];
 
-const ulList = document.querySelector(".js-gallery")
-console.log(ulList);
+const ulList = document.querySelector(".js-gallery");
 array.forEach((el) => {  
   ulList.insertAdjacentHTML("afterbegin", `
   <li class="gallery__item">
@@ -98,7 +97,6 @@ ulList.addEventListener("click", (e) => {
 
 const openModal = function(picture){  
   div.classList.add("is-open");
-  console.log(div);
   let img = document.querySelector(".lightbox__image");
   img.removeAttribute("src")
   img.setAttribute("src", picture)
