@@ -110,3 +110,9 @@ btn.addEventListener("click", () => {
   div.classList.remove("is-open")
 })
 
+const lightBox = document.querySelector(".lightbox__overlay");
+lightBox.addEventListener("click", () => {
+  div.classList.remove("is-open")
+})
+
+
