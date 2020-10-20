@@ -66,7 +66,7 @@ const array = [
 
 const ulList = document.querySelector(".js-gallery");
 array.forEach((el) => {  
-  ulList.insertAdjacentHTML("afterbegin", `
+  ulList.insertAdjacentHTML("beforeend", `
   <li class="gallery__item">
     <a
       class="gallery__link"
@@ -82,35 +82,40 @@ array.forEach((el) => {
   </li>`)
 })
 
-const bigImg = document.querySelector("[data-source]")
+const bigImg = document.querySelector("[data-source]");
 const div = document.querySelector(".js-lightbox");
+const btn = document.querySelector(".lightbox__button");
+const lightBox = document.querySelector(".lightbox__overlay");
 
-ulList.addEventListener("click", (e) => {
-  e.preventDefault()  
-  if (e.target.nodeName !== "IMG") {
-    return
-  } 
-  let img = e.target;   
-  openModal(img.dataset.source);
-})
-
-
-const openModal = function(picture){  
+const openModal = function (picture) {
+  div.addEventListener("click", closeModal);
   div.classList.add("is-open");
   let img = document.querySelector(".lightbox__image");
-  img.removeAttribute("src")
-  img.setAttribute("src", picture)
+  img.removeAttribute("src");
+  img.setAttribute("src", picture);  
 }
 
-const btn = document.querySelector(".lightbox__button");
+const closeModal = function (e) {
+  if (e.target.nodeName !== "IMG") {
+    div.classList.remove("is-open")
+    div.removeEventListener("click", closeModal);
+  };  
+}
 
-btn.addEventListener("click", () => {
-  div.classList.remove("is-open")
-})
+ulList.addEventListener("click", (e) => {
+  e.preventDefault()
+  if (e.target.nodeName !== "IMG") {
+    return
+  }
+  let img = e.target;
+  openModal(img.dataset.source);
+});
 
-const lightBox = document.querySelector(".lightbox__overlay");
-lightBox.addEventListener("click", () => {
-  div.classList.remove("is-open")
-})
+
+
+
+// btn.addEventListener("click",closeModal);
+// lightBox.addEventListener("click",closeModal);
+
 
 
